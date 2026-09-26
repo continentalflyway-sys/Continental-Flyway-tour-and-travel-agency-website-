@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071a35" />
+  <meta name="description" content="Continental Flyway — premium travel assistance and flight booking support." />
+  <title>Continental Flyway | Your Journey, Our Priority</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>✦ Your journey, our priority</span>
+      <div class="topbar-links"><a href="#contact">Contact us</a><span>•</span><span>Travel with confidence</span></div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="Continental Flyway home">
+        <span class="brand-mark">CF</span>
+        <span class="brand-copy"><strong>CONTINENTAL</strong><small>FLYWAY</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a class="nav-link active" href="#home">Home</a>
+        <a class="nav-link" href="#services">Our Services</a>
+        <a class="nav-link" href="#destinations">Destinations</a>
+        <a class="nav-link" href="#about">About Us</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-cta" href="#flight-search">Search Flights <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-shade"></div>
+      <div class="container hero-content">
+        <div class="eyebrow"><span class="eyebrow-line"></span> EXPLORE THE WORLD WITH US</div>
+        <h1>Every journey<br>begins with <em>trust.</em></h1>
+        <p>Thoughtful travel support, flight booking assistance, and journeys designed around you.</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href="#flight-search">Plan your journey <span>↗</span></a>
+          <a class="text-link" href="#services">Discover our services <span>→</span></a>
+        </div>
+        <div class="hero-note"><span class="note-icon">✧</span><span>Personalised support<br><b>from take-off to landing</b></span></div>
+      </div>
+      <div class="hero-bottom container">
+        <span>YOUR NEXT CHAPTER STARTS HERE</span>
+        <span class="hero-scroll">SCROLL TO EXPLORE ↓</span>
+      </div>
+    </section>
+
+    <section class="search-section" id="flight-search">
+      <div class="container">
+        <div class="search-heading">
+          <div><span class="section-kicker">LET'S GET YOU THERE</span><h2>Find your next flight</h2></div>
+          <span class="search-caption">A simple start to your next adventure.</span>
+        </div>
+        <form class="flight-form" id="flightForm">
+          <div class="field">
+            <label for="tripType">Trip type</label>
+            <select id="tripType" name="tripType"><option value="Round trip">Round trip</option><option value="One way">One way</option></select>
+          </div>
+          <div class="field">
+            <label for="from">From</label>
+            <input id="from" name="from" placeholder="City or airport" required autocomplete="off" />
+          </div>
+          <button class="swap-button" type="button" id="swapCities" aria-label="Swap departure and destination">⇄</button>
+          <div class="field">
+            <label for="to">To</label>
+            <input id="to" name="to" placeholder="Where to?" required autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="depart">Departure</label>
+            <input id="depart" name="depart" type="date" required />
+          </div>
+          <div class="field return-field" id="returnField">
+            <label for="return">Return</label>
+            <input id="return" name="return" type="date" />
+          </div>
+          <div class="field">
+            <label for="travellers">Travellers</label>
+            <select id="travellers" name="travellers"><option>1 traveller</option><option>2 travellers</option><option>3 travellers</option><option>4 travellers</option><option>5+ travellers</option></select>
+          </div>
+          <button class="button button-navy search-submit" type="submit">Search flights <span>→</span></button>
+        </form>
+        <p class="form-note" id="formMessage" role="status">Flight search is a demo request form. Connect an airline/GDS or booking API to show live fares.</p>
+      </div>
+    </section>
+
+    <section class="services section-pad" id="services">
+      <div class="container">
+        <div class="section-heading centered">
+          <span class="section-kicker">TRAVEL, MADE SIMPLE</span>
+          <h2>More than a ticket.<br><em>A better travel experience.</em></h2>
+          <p>From the first search to the final arrival, we help make your travel plans feel effortless.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card"><div class="service-icon">✈</div><span class="card-number">01</span><h3>Flight Booking</h3><p>Get help exploring flight options and planning routes that fit your schedule.</p><a href="#contact" class="card-link">Enquire now <span>↗</span></a></article>
+          <article class="service-card featured"><div class="service-icon">◎</div><span class="card-number">02</span><h3>Travel Planning</h3><p>Practical support for destinations, itineraries, and the details in between.</p><a href="#contact" class="card-link">Plan a trip <span>↗</span></a></article>
+          <article class="service-card"><div class="service-icon">▤</div><span class="card-number">03</span><h3>Travel Assistance</h3><p>Guidance with booking questions, schedule changes, and travel information.</p><a href="#contact" class="card-link">Talk to us <span>↗</span></a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="destinations section-pad" id="destinations">
+      <div class="container">
+        <div class="section-heading destination-heading">
+          <div><span class="section-kicker">INSPIRATION FOR YOUR NEXT TRIP</span><h2>Places worth <em>discovering.</em></h2></div>
+          <p>Have somewhere in mind? Let’s start planning how you’ll get there.</p>
+        </div>
+        <div class="destination-grid">
+          <a class="destination-card destination-bali" href="#contact"><span class="destination-label">ISLAND ESCAPE</span><span class="destination-name">Bali, Indonesia</span><span class="destination-arrow">↗</span></a>
+          <a class="destination-card destination-dubai" href="#contact"><span class="destination-label">CITY & CULTURE</span><span class="destination-name">Dubai, UAE</span><span class="destination-arrow">↗</span></a>
+          <a class="destination-card destination-istanbul" href="#contact"><span class="destination-label">HISTORY & HERITAGE</span><span class="destination-name">Istanbul, Türkiye</span><span class="destination-arrow">↗</span></a>
+        </div>
+        <p class="destination-disclaimer">Destination imagery is illustrative. Availability and fares depend on travel dates and suppliers.</p>
+      </div>
+    </section>
+
+    <section class="about-section section-pad" id="about">
+      <div class="container about-layout">
+        <div class="about-visual">
+          <div class="about-image"></div>
+          <div class="about-stamp"><span>CF</span><small>TRAVEL<br>WITH TRUST</small></div>
+          <div class="about-caption">A world of possibilities.<br><strong>One trusted starting point.</strong></div>
+        </div>
+        <div class="about-copy">
+          <span class="section-kicker">WELCOME TO CONTINENTAL FLYWAY</span>
+          <h2>Your plans matter.<br><em>Every detail does.</em></h2>
+          <p>Travel should feel exciting—not complicated. Continental Flyway is being built to make it easier to explore your options, ask questions, and plan your next journey with confidence.</p>
+          <div class="value-list">
+            <div><span class="value-check">✓</span><span><b>Personal attention</b><small>Support shaped around your trip.</small></span></div>
+            <div><span class="value-check">✓</span><span><b>Clear communication</b><small>Helpful guidance at each step.</small></span></div>
+            <div><span class="value-check">✓</span><span><b>Travel made easier</b><small>A simple place to begin planning.</small></span></div>
+          </div>
+          <a class="button button-navy" href="#contact">Get in touch <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section section-pad" id="contact">
+      <div class="container contact-layout">
+        <div class="contact-copy"><span class="section-kicker">LET'S TALK TRAVEL</span><h2>Where would you<br>like to <em>go next?</em></h2><p>Tell us a little about your plans. Our team can follow up to discuss your travel enquiry.</p><div class="contact-detail"><span class="contact-detail-icon">✉</span><span><small>EMAIL</small><b>your-email@example.com</b></span></div><div class="contact-detail"><span class="contact-detail-icon">⌖</span><span><small>LOCATION</small><b>Dhaka, Bangladesh</b></span></div></div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-title">Send an enquiry <span>✦</span></div>
+          <div class="form-row"><div class="field"><label for="name">Your name</label><input id="name" name="name" placeholder="Full name" required /></div><div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@example.com" required /></div></div>
+          <div class="field"><label for="interest">I'm interested in</label><select id="interest" name="interest"><option>Flight booking</option><option>Travel planning</option><option>Group travel</option><option>Other enquiry</option></select></div>
+          <div class="field"><label for="message">Tell us about your trip</label><textarea id="message" name="message" rows="4" placeholder="Destination, dates, or any questions..." required></textarea></div>
+          <button class="button button-gold form-submit" type="submit">Prepare enquiry <span>→</span></button>
+          <p class="form-note" id="contactMessage" role="status">Demo form: connect an email service or backend before accepting live enquiries.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <a class="brand brand-footer" href="#home"><span class="brand-mark">CF</span><span class="brand-copy"><strong>CONTINENTAL</strong><small>FLYWAY</small></span></a>
+      <p>Go further. Feel closer.<br>Let the journey begin.</p>
+      <div class="footer-links"><a href="#services">Services</a><a href="#destinations">Destinations</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> Continental Flyway. All rights reserved.</span><span>Designed for journeys beyond the ordinary.</span></div>
+  </footer>
+</body>
+</html>
