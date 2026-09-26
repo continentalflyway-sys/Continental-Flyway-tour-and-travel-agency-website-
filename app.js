@@ -95,8 +95,8 @@ if (contactForm && contactMessage) {
     const body = encodeURIComponent(
       `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nInterest: ${data.get("interest")}\n\nMessage:\n${data.get("message")}`
     );
-    contactMessage.textContent = "Your email app should open with the enquiry prepared. Replace the placeholder email address in index.html with your real business email.";
-    window.location.href = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
+    contactMessage.textContent = "Your email app should open with the enquiry prepared. Your email app should open with the enquiry prepared.";
+    window.location.href = `mailto:continentalflyway@gmail.com?subject=${subject}&body=${body}`;
   });
 }
 
