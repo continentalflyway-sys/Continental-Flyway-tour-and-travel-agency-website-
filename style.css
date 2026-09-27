@@ -6,3 +6,31 @@
 /* Text-only brand: logo image removed as requested. */
 .brand-text{font-family:var(--serif);font-size:clamp(18px,2vw,23px);font-weight:700;letter-spacing:-.02em;white-space:nowrap}.footer-brand.brand-text{font-size:21px;color:#fff}
 @media(max-width:430px){.brand-text{font-size:16px}.footer-brand.brand-text{font-size:18px}}
+
+
+/* Transparent navigation overlay + larger website name */
+.site-header{
+  background:transparent !important;
+  -webkit-backdrop-filter:none !important;
+  backdrop-filter:none !important;
+  box-shadow:none !important;
+  margin-bottom:-82px;
+}
+.brand-text{
+  color:#fff !important;
+  font-size:clamp(25px,2.6vw,34px) !important;
+  text-shadow:0 2px 12px rgba(0,0,0,.28);
+}
+.main-nav .nav-link{color:#fff !important;text-shadow:0 1px 8px rgba(0,0,0,.3)}
+.main-nav .nav-link:hover,.main-nav .nav-link.active{color:#e4c477 !important}
+.main-nav .nav-link:after{background:#e4c477}
+.menu-toggle span{background:#fff !important;box-shadow:0 1px 6px rgba(0,0,0,.35)}
+.lang-toggle{background:transparent !important;color:#fff !important;border-color:rgba(255,255,255,.65) !important}
+@media(max-width:760px){
+  .site-header{height:72px;margin-bottom:-72px}
+  .brand-text{font-size:clamp(20px,5.2vw,26px) !important}
+  .main-nav{background:transparent !important;box-shadow:none !important;border-top:1px solid rgba(255,255,255,.25)}
+  .main-nav .nav-link{color:#fff !important}
+  .main-nav .nav-link:hover,.main-nav .nav-link.active{color:#e4c477 !important}
+  .main-nav .nav-cta{background:#c8a65b;color:#071a35}
+}
