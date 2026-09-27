@@ -189,3 +189,67 @@
   .founder-photo{height:300px!important;}
 }
 @media(prefers-reduced-motion:reduce){.main-nav{transition:none!important}.site-header{transition:none!important;}}
+
+
+/* Equal profile sizing for Founder, Co-Founder and Director. */
+.founder-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch;}
+.founder-card{display:flex!important;flex-direction:column!important;min-width:0;height:100%;}
+.founder-photo{height:360px!important;min-height:0!important;flex:0 0 360px;background:#f0f0f0!important;position:relative;overflow:hidden;}
+.founder-photo img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;object-fit:contain!important;object-position:center bottom!important;padding:8px!important;}
+.founder-info{flex:1;padding:24px!important;}
+@media(max-width:900px){.founder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+@media(max-width:760px){.founder-grid{grid-template-columns:1fr!important;}.founder-photo{height:clamp(300px,78vw,390px)!important;flex-basis:clamp(300px,78vw,390px)!important;}.founder-info{padding:22px!important;}}
+
+
+/* Final polish: equal transparent profile cutouts and Canton Fair feature. */
+.canton-section{padding:88px 0;background:#fff;}
+.canton-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.canton-copy h2{font:600 clamp(34px,4.2vw,49px)/1.18 var(--serif);letter-spacing:-.025em;color:var(--navy);margin:15px 0 18px;}
+.canton-copy h2 em{color:#b78d42;}
+.canton-copy>p{font-size:14px;line-height:1.9;color:var(--muted);max-width:540px;}
+.canton-points{list-style:none;padding:0;margin:22px 0 26px;display:grid;gap:11px;color:#425166;font-size:13px;}
+.canton-points li:before{content:'✓';display:inline-grid;place-items:center;width:22px;height:22px;margin-right:10px;border-radius:50%;background:#f4ead2;color:#8b682b;font-weight:700;}
+.canton-enquire{display:inline-block;margin-left:18px;font-size:12px;font-weight:700;color:var(--navy);}
+.canton-video-card{position:relative;display:block;min-height:340px;aspect-ratio:16/11;overflow:hidden;background:#071a35;border-radius:12px;box-shadow:0 22px 55px rgba(7,26,53,.18);}
+.canton-video-card:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,17,38,.82),rgba(4,17,38,.05) 70%);}
+.canton-video-card img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform .5s;}
+.canton-video-card:hover img{transform:scale(1.04);}
+.video-play{position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--navy);padding-left:4px;font-size:23px;box-shadow:0 0 0 12px rgba(255,255,255,.18);}
+.video-card-label{position:absolute;z-index:2;left:26px;bottom:24px;display:flex;flex-direction:column;gap:5px;color:#fff;}
+.video-card-label b{font-size:11px;letter-spacing:.15em;}
+.video-card-label small{font-size:13px;color:#e3e8ef;}
+/* Transparent header over the hero, with a high-contrast name and links. */
+.site-header{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;}
+.site-header .brand-text{font-size:clamp(30px,3vw,39px)!important;color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.3);}
+.site-header .main-nav .nav-link{color:#fff!important;text-shadow:0 1px 8px rgba(0,0,0,.3);}
+.site-header .main-nav .nav-link:hover,.site-header .main-nav .nav-link.active{color:var(--gold-light)!important;}
+.site-header.is-scrolled{background:rgba(7,26,53,.96)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;}
+/* Founder images share one transparent 800x1000 canvas and aligned baseline. */
+.founder-photo{background:#f0f0f0!important;}
+.founder-photo img{object-fit:contain!important;object-position:center bottom!important;padding:0!important;background:transparent!important;}
+/* Contact details remain easy to read on desktop and mobile. */
+.contact-mini a,.contact-mini a span{font-size:15px!important;line-height:1.8!important;}
+.footer-contact{font-size:13px!important;line-height:1.8!important;}
+@media(max-width:900px){.canton-layout{grid-template-columns:1fr;gap:28px}.canton-video-card{min-height:280px;}}
+@media(max-width:760px){
+  .site-header{background:transparent!important;margin-bottom:-72px;position:sticky;top:0;z-index:140;}
+  .site-header .brand-text{font-size:clamp(23px,6vw,29px)!important;}
+  .canton-section{padding:64px 0;}
+  .canton-copy h2{font-size:35px;}
+  .canton-copy>p{font-size:13px;}
+  .canton-enquire{display:block;margin:18px 0 0;}
+  .canton-video-card{min-height:220px;}
+  .founder-grid{grid-template-columns:1fr!important;}
+  .founder-card{display:flex!important;flex-direction:column!important;}
+  .founder-photo{height:clamp(300px,78vw,390px)!important;flex:0 0 clamp(300px,78vw,390px)!important;}
+  .founder-photo img{width:100%!important;height:100%!important;}
+}
+
+/* Leadership profiles: three consistent portrait cards on desktop. */
+.founder-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch;gap:22px!important}
+.founder-card{display:flex!important;flex-direction:column!important;min-width:0;height:100%}
+.founder-photo{height:340px!important;min-height:0!important;flex:0 0 340px!important;background:#e8e9eb!important;position:relative;overflow:hidden}
+.founder-photo img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;object-fit:contain!important;object-position:center bottom!important;padding:0!important;background:transparent!important}
+.founder-info{flex:1;padding:23px 21px!important}
+@media(max-width:1000px){.founder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.founder-photo{height:340px!important;flex-basis:340px!important}}
+@media(max-width:760px){.founder-grid{grid-template-columns:1fr!important;gap:20px!important}.founder-photo{height:clamp(300px,78vw,390px)!important;flex-basis:clamp(300px,78vw,390px)!important}.founder-info{padding:22px!important}}
