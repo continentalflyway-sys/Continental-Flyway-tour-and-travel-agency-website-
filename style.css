@@ -462,3 +462,9 @@ html[lang="zh-CN"] body{font-family:"Noto Sans SC","DM Sans",sans-serif}
   .site-header .menu-toggle{order:3;margin-left:0;flex-shrink:0}
   .site-header .main-nav{order:4}
 }
+
+
+/* Profile portraits blend into the website's warm off-white founders section. */
+.founders-section{background:#f8f7f4!important;}
+.founder-photo{background:#f8f7f4!important;}
+.founder-photo img{background:transparent!important;}
