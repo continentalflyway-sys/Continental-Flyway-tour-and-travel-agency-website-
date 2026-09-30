@@ -277,22 +277,8 @@
 .services-section .service-card.featured-service .arrow-link{color:#8a682e!important;}
 
 
-/* Language switch beside the hamburger menu; JS continues to use #langToggle. */
-.header-language-toggle{display:inline-flex;align-items:center;justify-content:center;position:relative;z-index:142;flex:0 0 auto;margin-left:10px;white-space:nowrap;border:1px solid rgba(255,255,255,.65);background:rgba(7,26,53,.18);color:#fff;padding:7px 10px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;text-shadow:0 1px 5px rgba(0,0,0,.2)}
-.site-header.is-scrolled .header-language-toggle{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
-@media(min-width:761px){
-  .header-language-toggle{margin-left:0;margin-right:18px}
-  .menu-toggle{display:none}
-}
-@media(max-width:760px){
-  .nav-wrap{justify-content:flex-start;gap:0}
-  .brand{min-width:0;max-width:calc(100% - 112px)}
-  .brand-text{overflow:hidden;text-overflow:ellipsis}
-  .menu-toggle{margin-left:auto;order:2}
-  .header-language-toggle{order:3;margin-left:8px;padding:7px 9px;font-size:11px}
-  .main-nav{z-index:131}
-}
-@media(max-width:430px){
-  .brand{max-width:calc(100% - 105px)}
-  .header-language-toggle{padding:6px 7px;font-size:10px}
-}
+/* Continental Flyway logo image */
+.site-header .brand-logo-image { display:block; width:190px; height:76px; object-fit:contain; object-position:left center; }
+.site-footer .brand-logo-image { display:block; width:190px; height:76px; object-fit:contain; object-position:left center; }
+@media (max-width:760px) { .site-header .brand-logo-image { width:155px; height:62px; } }
+@media (max-width:430px) { .site-header .brand-logo-image { width:142px; height:58px; } }
