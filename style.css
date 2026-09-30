@@ -413,3 +413,40 @@ body{overflow-x:hidden;}
   .floating-whatsapp{right:12px;bottom:12px;}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.hero-actions .button{transition:none;}}
+
+/* Brand color update: destination cards navy, service cards deep brown. */
+.services-section .service-card,
+.services-section .service-card.featured-service{
+  background:#160D08!important;
+  color:#FFFFFF!important;
+  border:1px solid #34251D!important;
+  box-shadow:0 5px 18px #071a3510;
+}
+.services-section .service-card:hover,
+.services-section .service-card.featured-service:hover{
+  background:#21140D!important;
+  border-color:#6B4A32!important;
+  box-shadow:0 14px 30px #071a3520;
+}
+.services-section .service-card h3,
+.services-section .service-card.featured-service h3{color:#FFFFFF!important;}
+.services-section .service-card p,
+.services-section .service-card.featured-service p{color:#E0D8D2!important;}
+.services-section .service-card .card-number{color:#CBA65C!important;}
+.services-section .service-card .service-icon{color:#D4AF37!important;}
+.services-section .service-card .arrow-link,
+.services-section .service-card.featured-service .arrow-link{color:#EAD7A5!important;}
+
+.destination-section .country-card{
+  background:#002147!important;
+  border-color:#163B60!important;
+}
+.destination-section .country-content{background:#002147!important;color:#FFFFFF!important;}
+.destination-section .country-title-row h3{color:#FFFFFF!important;}
+.destination-section .country-capital{color:#D3DFEC!important;}
+.destination-section .country-heritage,
+.destination-section .country-history{color:#E0E8F0!important;}
+.destination-section .country-history{border-top-color:#31516F!important;}
+.destination-section .country-history b{color:#FFFFFF!important;}
+.destination-section .country-enquire{color:#EAD7A5!important;}
+.destination-section .country-card:hover{box-shadow:0 12px 30px #00214730;}
