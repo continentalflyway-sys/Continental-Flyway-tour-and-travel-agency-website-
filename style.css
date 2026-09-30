@@ -400,3 +400,8 @@ img, video, iframe, svg {
   .hero h1 { overflow-wrap: anywhere; }
   .form-row { grid-template-columns: minmax(0, 1fr); }
 }
+
+
+/* Profile photos supplied by the user: dark background blends with portrait edges. */
+.founder-photo{background:#05070b!important;}
+.founder-photo img{padding:0!important;object-fit:contain!important;object-position:center bottom!important;}

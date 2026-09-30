@@ -7,3 +7,7 @@ This package keeps the supplied index.html and app.js structure, and updates sty
 - consistent logo sizing in header and footer
 
 IMPORTANT: Upload the contents of this folder to the root of your existing GitHub Pages repository, including the assets folder. Replace the old index.html, app.js and style.css. Do not upload the outer folder itself as a nested folder. Keep the assets folder beside these three files.
+
+
+PROFILE PHOTO UPDATE
+The three profile photos supplied by the site owner have been added in the same order as the leadership cards: Easin Arafat (Founder & CEO), Shahanul Islam (Co-Founder & Director), and Bahalul Islam (Director). The profile images are optimized JPEG files.
