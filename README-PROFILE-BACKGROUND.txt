@@ -7,3 +7,9 @@ Changes in this package:
 - Kept the rest of the website files and assets in this package.
 
 To publish: extract this ZIP, then upload/replace the contents inside the Continental-Flyway-Restored folder at the root of your GitHub Pages repository. Keep index.html, style.css, app.js, and assets together. Commit the changes.
+
+
+DIRECTOR PROFILE PHOTO UPDATE (30 Sep 2026):
+- Replaced assets/bahalul-islam-director-web.png with the newly supplied Director portrait.
+- Removed the black background and saved the portrait with transparency so it blends into the website profile frame.
+- The existing profile name, role, and number (03) remain unchanged.
