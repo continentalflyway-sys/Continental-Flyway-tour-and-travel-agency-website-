@@ -11,3 +11,6 @@ IMPORTANT: Upload the contents of this folder to the root of your existing GitHu
 
 PROFILE PHOTO UPDATE
 The three profile photos supplied by the site owner have been added in the same order as the leadership cards: Easin Arafat (Founder & CEO), Shahanul Islam (Co-Founder & Director), and Bahalul Islam (Director). The profile images are optimized JPEG files.
+
+
+PROFILE PHOTO UPDATE: The three supplied leadership portraits have been added to the matching founder/director image assets. The live GitHub Pages website is not updated until you upload these files to your repository and commit the changes.

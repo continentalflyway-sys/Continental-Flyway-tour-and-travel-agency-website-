@@ -1,9 +1,61 @@
 const menuToggle=document.getElementById('menuToggle');const mainNav=document.getElementById('mainNav');
 const siteHeader=document.querySelector('.site-header');const updateHeaderScroll=()=>{if(siteHeader)siteHeader.classList.toggle('is-scrolled',window.scrollY>50)};window.addEventListener('scroll',updateHeaderScroll,{passive:true});updateHeaderScroll();
 if(menuToggle&&mainNav){const closeMenu=()=>{mainNav.classList.remove('open');document.body.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Open navigation menu')};menuToggle.addEventListener('click',()=>{const open=mainNav.classList.toggle('open');document.body.classList.toggle('menu-open',open);menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')});mainNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});document.addEventListener('click',e=>{if(!mainNav.contains(e.target)&&!menuToggle.contains(e.target))closeMenu()})}
-const translations={};let currentLang='en';const langToggle=document.getElementById('langToggle');
-function setLanguage(lang){currentLang=lang;document.documentElement.lang=lang==='bn'?'bn':'en';document.querySelectorAll('[data-en][data-bn]').forEach(el=>{el.innerHTML=el.dataset[lang]});document.querySelectorAll('[data-placeholder-en][data-placeholder-bn]').forEach(el=>{el.placeholder=el.dataset['placeholder'+(lang==='bn'?'Bn':'En')]});if(langToggle)langToggle.textContent=lang==='en'?'বাংলা':'English';renderCountries();}
-if(langToggle)langToggle.addEventListener('click',()=>setLanguage(currentLang==='en'?'bn':'en'));
+const translations={};
+const languageSelect=document.getElementById('languageSelect');
+const otherLanguagePicker=document.getElementById('otherLanguagePicker');
+let currentLang=localStorage.getItem('cf-language')||'en';
+function applyBaseLanguage(lang){
+  document.querySelectorAll('[data-en][data-bn]').forEach(el=>{el.innerHTML=el.dataset[lang]||el.dataset.en});
+  document.querySelectorAll('[data-placeholder-en][data-placeholder-bn]').forEach(el=>{el.placeholder=el.dataset['placeholder'+(lang==='bn'?'Bn':'En')]||el.dataset.placeholderEn||''});
+}
+function clearGoogleTranslateCookie(){
+  document.cookie='googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+  document.cookie='googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain='+location.hostname;
+}
+function applyFlywayGoogleLanguage(){
+  if(!['zh-CN','ar','hi'].includes(currentLang)) return;
+  const combo=document.querySelector('.goog-te-combo');
+  if(combo){combo.value=currentLang;combo.dispatchEvent(new Event('change'));}
+  else window.setTimeout(applyFlywayGoogleLanguage,250);
+}
+window.applyFlywayGoogleLanguage=applyFlywayGoogleLanguage;
+function setLanguage(lang){
+  if(lang==='other'){
+    if(otherLanguagePicker) otherLanguagePicker.hidden=false;
+    const combo=document.querySelector('.goog-te-combo');
+    if(combo){combo.focus();}
+    return;
+  }
+  if(otherLanguagePicker) otherLanguagePicker.hidden=true;
+  const previous=currentLang;
+  currentLang=lang;
+  localStorage.setItem('cf-language',lang);
+  if(languageSelect) languageSelect.value=lang;
+  if(lang==='en'||lang==='bn'){
+    document.documentElement.lang=lang;
+    document.documentElement.dir='ltr';
+    if(previous!=='en'&&previous!=='bn'){
+      clearGoogleTranslateCookie();
+      location.reload();
+      return;
+    }
+    applyBaseLanguage(lang);
+  }else{
+    // Reset the authored bilingual content to English before applying full-page translation.
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+    applyBaseLanguage('en');
+  }
+  renderCountries();
+  if(['zh-CN','ar','hi'].includes(lang)) applyFlywayGoogleLanguage();
+}
+if(languageSelect) languageSelect.addEventListener('change',()=>setLanguage(languageSelect.value));
+// Restore the user's last selected language when the page is reopened.
+if(currentLang==='bn') setLanguage('bn');
+else if(['zh-CN','ar','hi'].includes(currentLang)) { if(languageSelect) languageSelect.value=currentLang; applyBaseLanguage('en'); document.documentElement.lang=currentLang; document.documentElement.dir=currentLang==='ar'?'rtl':'ltr'; }
+else { currentLang='en'; if(languageSelect) languageSelect.value='en'; applyBaseLanguage('en'); }
+
 const countries=[
 {n:'Bangladesh',bn:'বাংলাদেশ',r:'South Asia',cap:'Dhaka',capbn:'ঢাকা',img:'photo-1589308078059-be1415eab4c3',heritage:'The Sundarbans, river landscapes, terracotta temples and the living traditions of Bengali language and crafts.',heritagebn:'সুন্দরবন, নদীমাতৃক ভূদৃশ্য, পোড়ামাটির মন্দির এবং বাংলা ভাষা ও কারুশিল্পের জীবন্ত ঐতিহ্য।',history:'The region has a long history shaped by ancient Bengal, Buddhist and Hindu kingdoms, the Bengal Sultanate and the 1971 Liberation War.',historybn:'প্রাচীন বঙ্গ, বৌদ্ধ ও হিন্দু রাজ্য, বাংলা সালতানাত এবং ১৯৭১ সালের মুক্তিযুদ্ধ এই অঞ্চলের ইতিহাস গড়েছে।'},
 {n:'India',bn:'ভারত',r:'South Asia',cap:'New Delhi',capbn:'নয়াদিল্লি',img:'photo-1524492412937-b28074a5d7da',heritage:'The Taj Mahal, temple architecture, classical dance, regional cuisines and many living languages.',heritagebn:'তাজমহল, মন্দির স্থাপত্য, শাস্ত্রীয় নৃত্য, আঞ্চলিক খাবার ও বহু জীবন্ত ভাষা।',history:'The subcontinent includes the Indus Valley civilisation, ancient empires, the Mughal era and the independence movement.',historybn:'এই উপমহাদেশে সিন্ধু সভ্যতা, প্রাচীন সাম্রাজ্য, মুঘল যুগ এবং স্বাধীনতা আন্দোলনের ইতিহাস রয়েছে।'},
@@ -55,3 +107,14 @@ document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('clic
 const navLinks=[...document.querySelectorAll('.nav-link')];const sections=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});sections.forEach(s=>observer.observe(s))}
 const enquiryForm=document.getElementById('enquiryForm');if(enquiryForm){enquiryForm.addEventListener('submit',e=>{e.preventDefault();if(!enquiryForm.reportValidity())return;const d=new FormData(enquiryForm);const body=[`Name: ${d.get('name')}`,`Phone/WhatsApp: ${d.get('phone')}`,`Service: ${d.get('service')}`,`Message: ${d.get('message')||'No additional message'}`].join('\n');window.location.href=`mailto:continentalflyway@gmail.com?subject=${encodeURIComponent('Website enquiry — '+d.get('service'))}&body=${encodeURIComponent(body)}`;document.getElementById('formMessage').textContent=currentLang==='bn'?'আপনার ইমেইল অ্যাপ খুলবে। বার্তাটি পাঠাতে সেখানে Send চাপুন।':'Your email app should open with the enquiry. Press Send there to submit it.'})}
 const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();renderCountries();
+
+// Allow visitors to choose additional languages from Google's full language list.
+document.addEventListener('change',function(e){
+  if(!e.target.matches('.goog-te-combo')) return;
+  const code=e.target.value;
+  if(!code) return;
+  currentLang=code;
+  document.documentElement.lang=code;
+  document.documentElement.dir=['ar','fa','ur','ps'].includes(code)?'rtl':'ltr';
+  localStorage.setItem('cf-language',code);
+});
