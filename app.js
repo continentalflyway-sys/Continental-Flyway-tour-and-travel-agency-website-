@@ -2,8 +2,45 @@ const menuToggle=document.getElementById('menuToggle');const mainNav=document.ge
 const siteHeader=document.querySelector('.site-header');const updateHeaderScroll=()=>{if(siteHeader)siteHeader.classList.toggle('is-scrolled',window.scrollY>50)};window.addEventListener('scroll',updateHeaderScroll,{passive:true});updateHeaderScroll();
 if(menuToggle&&mainNav){const closeMenu=()=>{mainNav.classList.remove('open');document.body.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Open navigation menu')};menuToggle.addEventListener('click',()=>{const open=mainNav.classList.toggle('open');document.body.classList.toggle('menu-open',open);menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')});mainNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});document.addEventListener('click',e=>{if(!mainNav.contains(e.target)&&!menuToggle.contains(e.target))closeMenu()})}
 const translations={};let currentLang='en';const languageSelect=document.getElementById('languageSelect');
-function setLanguage(lang){lang=lang==='bn'?'bn':'en';currentLang=lang;document.documentElement.lang=lang;document.querySelectorAll('[data-en][data-bn]').forEach(el=>{el.innerHTML=el.dataset[lang]});document.querySelectorAll('[data-placeholder-en][data-placeholder-bn]').forEach(el=>{el.placeholder=el.dataset['placeholder'+(lang==='bn'?'Bn':'En')]});if(languageSelect)languageSelect.value=lang;renderCountries();}
-if(languageSelect)languageSelect.addEventListener('change',()=>setLanguage(languageSelect.value));
+function setLanguage(lang){
+  // Only languages with complete site translations are selectable as active languages.
+  // Other entries are a transparent roadmap; never pretend a translation is available.
+  if (lang !== 'en' && lang !== 'bn') {
+    if (languageSelect) languageSelect.value = currentLang;
+    let notice = document.getElementById('languageNotice');
+    if (!notice) {
+      notice = document.createElement('div');
+      notice.id = 'languageNotice';
+      notice.setAttribute('role', 'status');
+      notice.style.cssText = 'position:fixed;z-index:9999;left:50%;bottom:20px;transform:translateX(-50%);max-width:calc(100% - 32px);padding:12px 16px;border-radius:10px;background:#071a35;color:#fff;border:1px solid #d4af37;box-shadow:0 8px 28px #0003;font:500 14px/1.5 sans-serif;text-align:center';
+      document.body.appendChild(notice);
+    }
+    notice.textContent = 'This language is planned but not translated yet. Available now: English and বাংলা.';
+    window.clearTimeout(window.__cfLanguageNoticeTimer);
+    window.__cfLanguageNoticeTimer = window.setTimeout(() => notice.remove(), 4200);
+    return;
+  }
+  const selected = lang;
+  currentLang = selected;
+  document.documentElement.setAttribute('lang', selected);
+  document.querySelectorAll('[data-en][data-bn]').forEach(el => {
+    const translated = el.getAttribute('data-' + selected);
+    if (translated !== null) el.innerHTML = translated;
+  });
+  document.querySelectorAll('[data-placeholder-en][data-placeholder-bn]').forEach(el => {
+    const key = selected === 'bn' ? 'data-placeholder-bn' : 'data-placeholder-en';
+    const translated = el.getAttribute(key);
+    if (translated !== null) el.setAttribute('placeholder', translated);
+  });
+  if (languageSelect) languageSelect.value = selected;
+  try { window.localStorage.setItem('continentalFlywayLanguage', selected); } catch (e) {}
+  if (typeof renderCountries === 'function') renderCountries();
+}
+if (languageSelect) {
+  languageSelect.addEventListener('change', function () { setLanguage(this.value); });
+  languageSelect.addEventListener('input', function () { setLanguage(this.value); });
+}
+
 const countries=[
 {n:'Bangladesh',bn:'বাংলাদেশ',r:'South Asia',cap:'Dhaka',capbn:'ঢাকা',img:'photo-1589308078059-be1415eab4c3',heritage:'The Sundarbans, river landscapes, terracotta temples and the living traditions of Bengali language and crafts.',heritagebn:'সুন্দরবন, নদীমাতৃক ভূদৃশ্য, পোড়ামাটির মন্দির এবং বাংলা ভাষা ও কারুশিল্পের জীবন্ত ঐতিহ্য।',history:'The region has a long history shaped by ancient Bengal, Buddhist and Hindu kingdoms, the Bengal Sultanate and the 1971 Liberation War.',historybn:'প্রাচীন বঙ্গ, বৌদ্ধ ও হিন্দু রাজ্য, বাংলা সালতানাত এবং ১৯৭১ সালের মুক্তিযুদ্ধ এই অঞ্চলের ইতিহাস গড়েছে।'},
 {n:'India',bn:'ভারত',r:'South Asia',cap:'New Delhi',capbn:'নয়াদিল্লি',img:'photo-1524492412937-b28074a5d7da',heritage:'The Taj Mahal, temple architecture, classical dance, regional cuisines and many living languages.',heritagebn:'তাজমহল, মন্দির স্থাপত্য, শাস্ত্রীয় নৃত্য, আঞ্চলিক খাবার ও বহু জীবন্ত ভাষা।',history:'The subcontinent includes the Indus Valley civilisation, ancient empires, the Mughal era and the independence movement.',historybn:'এই উপমহাদেশে সিন্ধু সভ্যতা, প্রাচীন সাম্রাজ্য, মুঘল যুগ এবং স্বাধীনতা আন্দোলনের ইতিহাস রয়েছে।'},
@@ -54,4 +91,8 @@ function renderCountries(){if(!countryGrid)return;const q=(countrySearch?.value|
 document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{activeRegion=btn.dataset.region;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b===btn));renderCountries()}));if(countrySearch)countrySearch.addEventListener('input',renderCountries);
 const navLinks=[...document.querySelectorAll('.nav-link')];const sections=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});sections.forEach(s=>observer.observe(s))}
 const enquiryForm=document.getElementById('enquiryForm');if(enquiryForm){enquiryForm.addEventListener('submit',e=>{e.preventDefault();if(!enquiryForm.reportValidity())return;const d=new FormData(enquiryForm);const body=[`Name: ${d.get('name')}`,`Phone/WhatsApp: ${d.get('phone')}`,`Service: ${d.get('service')}`,`Message: ${d.get('message')||'No additional message'}`].join('\n');window.location.href=`mailto:continentalflyway@gmail.com?subject=${encodeURIComponent('Website enquiry — '+d.get('service'))}&body=${encodeURIComponent(body)}`;document.getElementById('formMessage').textContent=currentLang==='bn'?'আপনার ইমেইল অ্যাপ খুলবে। বার্তাটি পাঠাতে সেখানে Send চাপুন।':'Your email app should open with the enquiry. Press Send there to submit it.'})}
-const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();renderCountries();
+const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
+let initialLanguage = 'en';
+try { initialLanguage = window.localStorage.getItem('continentalFlywayLanguage') || 'en'; } catch (e) {}
+setLanguage(initialLanguage);
+renderCountries();
